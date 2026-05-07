@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FindKpop — About Us</title>
 
+<link rel="icon" type="image/png" href="findkpop.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #12121a;
+  --border: #1f1f2a;
+  --text: #ffffff;
+  --muted: #9ca3af;
+  --green: #00ffa6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* NAVBAR */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.nav a {
+  color: var(--muted);
+  margin-left: 25px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 100px 20px 40px;
+}
+
+.hero h1 {
+  font-size: 56px;
+  font-weight: 700;
+  background: linear-gradient(to right, #ffffff, #aaaaaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+/* CONTENT */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* HIGHLIGHT BOX */
+.highlight {
+  border-left: 3px solid var(--green);
+  padding-left: 15px;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 50px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="nav">
+  <div class="logo">FindKpop</div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="artists.html">Artists</a>
+    <a href="aboutus.html">About Us</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>About FindKpop</h1>
+  <p>Built by fans, for fans</p>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="card">
+    <h2>What is FindKpop?</h2>
+    <p>
+      FindKpop is a K-pop deal discovery platform that helps fans find the best prices on albums, merch, and collectibles from across the internet in one place.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Our Mission</h2>
+    <p>
+      K-pop merch can be expensive and hard to track down. Our mission is to make it easier for fans worldwide to compare prices and find the best deals instantly.
+    </p>
+  </div>
+
+  <div class="card highlight">
+    <h2>Why we built it</h2>
+    <p>
+      We’re K-pop fans ourselves. We got tired of searching across multiple websites just to find the same album cheaper somewhere else — so we built a tool to solve it.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>What’s next?</h2>
+    <p>
+      We’re planning to add more features like price alerts, wishlist tracking, and personalized recommendations for your favourite groups.
+    </p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+ © 2026 FindKpop — Built for fans
+</div>
+
+</body>
+</html>
