@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { isKpopQuery } from "./kpopValidator.js";
 
 dotenv.config();
 
@@ -9,51 +10,18 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-/* ALLOWED K-POP KEYWORDS */
-const allowedKeywords = [
-  // GENERAL
-  "kpop", "k-pop", "album", "photocard", "lightstick", "merch",
-  "season greetings", "signed", "pob", "preorder", "digipack",
-
-  // GROUPS
-  "bts", "seventeen", "stray kids", "txt", "tomorrow x together",
-  "enhypen", "ateez", "exo", "nct", "nct 127", "nct dream", "wayv",
-  "riize", "treasure", "the boyz", "zerobaseone", "zb1",
-  "boynextdoor", "got7", "monsta x", "shinee", "super junior",
-  "bigbang", "ikon", "winner", "2pm", "day6", "xdinary heroes",
-  "btob", "infinite", "astro", "oneus", "p1harmony", "evnne",
-  "tempest", "all(h)ours",
-
-  // GIRL GROUPS
-  "blackpink", "twice", "newjeans", "aespa", "ive",
-  "le sserafim", "lesserafim", "itzy", "nmixx", "gidle",
-  "(g)i-dle", "idle", "babymonster", "kiss of life", "kiof",
-  "illit", "izna", "katseye", "hearts2hearts", "meovv",
-  "fifty fifty", "kep1er", "stayc", "fromis_9", "red velvet",
-  "mamamoo", "oh my girl", "dreamcatcher", "weeekly", "viviz",
-  "wooah", "csr", "triples", "tripleS", "class:y",
-  "young posse", "badvillain", "rescene", "unis",
-  "h1-key", "cignature", "purple kiss",
-
-  // SOLOISTS
-  "iu", "taeyeon", "jungkook", "jimin", "v", "rm", "suga",
-  "j-hope", "jhope", "rose", "rosé", "jennie", "lisa",
-  "jisoo", "cha eunwoo", "sunmi", "chungha", "somi"
-];
-
 /* SEARCH ROUTE */
 app.get("/search", async (req, res) => {
   try {
-    const query = (req.query.q || "").toLowerCase().trim();
+    const query = (req.query.q || "").trim();
 
-    // BLOCK NON K-POP SEARCHES
-    const isKpopSearch = allowedKeywords.some(keyword =>
-      query.includes(keyword)
-    );
+    // 🔒 K-POP VALIDATION (NEW SYSTEM)
+    const result = isKpopQuery(query);
 
-    if (!isKpopSearch) {
+    if (!result.valid) {
       return res.status(400).json({
-        error: "Only K-pop related searches are allowed."
+        error: "Only K-pop related searches are allowed.",
+        details: result
       });
     }
 
@@ -81,7 +49,7 @@ app.get("/search", async (req, res) => {
   }
 });
 
-/* START SERVER (ONLY ONCE) */
+/* START SERVER */
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
