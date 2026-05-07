@@ -1,1 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FindKpop — Groups</title>
 
+<link rel="icon" type="image/png" href="findkpop.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0a0f;
+  --card: #12121a;
+  --border: #1f1f2a;
+  --text: #ffffff;
+  --muted: #9ca3af;
+  --green: #00ffa6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* NAVBAR (EXACT STYLE YOU PROVIDED) */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.nav a {
+  color: var(--muted);
+  margin-left: 25px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 90px 20px 20px;
+}
+
+.hero h1 {
+  font-size: 60px;
+  font-weight: 700;
+  background: linear-gradient(to right, #ffffff, #aaaaaa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+/* FILTER */
+.filter {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.filter select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: white;
+  outline: none;
+}
+
+/* GRID */
+.grid {
+  padding: 40px 60px 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+/* CARD */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #2a2a3a;
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  font-size: 14px;
+}
+
+.card p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.badge {
+  margin-top: 8px;
+  font-size: 10px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  display: inline-block;
+  background: rgba(0,255,166,0.1);
+  color: var(--green);
+  border: 1px solid rgba(0,255,166,0.2);
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR (same structure as your other page) -->
+<div class="nav">
+  <div class="logo">FindKpop</div>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="artists.html">Artists</a>
+    <a href="aboutus.html">About Us</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>K-pop Groups</h1>
+  <p>Browse artists by category</p>
+
+  <div class="filter">
+    <select id="filterSelect" onchange="render()">
+      <option value="all">All</option>
+      <option value="boy">Boy Groups</option>
+      <option value="girl">Girl Groups</option>
+      <option value="solo">Solo</option>
+    </select>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid" id="grid"></div>
+
+<script>
+const artists = [
+  // BOY GROUPS
+  { name: "BTS", type: "boy" },
+  { name: "SEVENTEEN", type: "boy" },
+  { name: "STRAY KIDS", type: "boy" },
+  { name: "TXT", type: "boy" },
+  { name: "TOMORROW X TOGETHER", type: "boy" },
+  { name: "ENHYPEN", type: "boy" },
+  { name: "ATEEZ", type: "boy" },
+  { name: "EXO", type: "boy" },
+  { name: "NCT", type: "boy" },
+  { name: "NCT 127", type: "boy" },
+  { name: "NCT DREAM", type: "boy" },
+  { name: "WAYV", type: "boy" },
+  { name: "RIIZE", type: "boy" },
+  { name: "TREASURE", type: "boy" },
+  { name: "THE BOYZ", type: "boy" },
+  { name: "ZEROBASEONE", type: "boy" },
+  { name: "ZB1", type: "boy" },
+  { name: "BOYNEXTDOOR", type: "boy" },
+  { name: "GOT7", type: "boy" },
+  { name: "MONSTA X", type: "boy" },
+  { name: "SHINEE", type: "boy" },
+  { name: "SUPER JUNIOR", type: "boy" },
+  { name: "BIGBANG", type: "boy" },
+  { name: "IKON", type: "boy" },
+  { name: "WINNER", type: "boy" },
+  { name: "2PM", type: "boy" },
+  { name: "DAY6", type: "boy" },
+  { name: "XDINARY HEROES", type: "boy" },
+  { name: "BTOB", type: "boy" },
+  { name: "INFINITE", type: "boy" },
+  { name: "ASTRO", type: "boy" },
+  { name: "ONEUS", type: "boy" },
+  { name: "P1HARMONY", type: "boy" },
+  { name: "EVNNE", type: "boy" },
+  { name: "TEMPEST", type: "boy" },
+  { name: "ALL(H)OURS", type: "boy" },
+
+  // GIRL GROUPS
+  { name: "BLACKPINK", type: "girl" },
+  { name: "TWICE", type: "girl" },
+  { name: "NEWJEANS", type: "girl" },
+  { name: "AESPA", type: "girl" },
+  { name: "IVE", type: "girl" },
+  { name: "LE SSERAFIM", type: "girl" },
+  { name: "LESSERAFIM", type: "girl" },
+  { name: "ITZY", type: "girl" },
+  { name: "NMIXX", type: "girl" },
+  { name: "GIDLE", type: "girl" },
+  { name: "(G)I-DLE", type: "girl" },
+  { name: "IDLE", type: "girl" },
+  { name: "BABYMONSTER", type: "girl" },
+  { name: "KISS OF LIFE", type: "girl" },
+  { name: "KIOF", type: "girl" },
+  { name: "ILLIT", type: "girl" },
+  { name: "IZNA", type: "girl" },
+  { name: "KATSEYE", type: "girl" },
+  { name: "HEARTS2HEARTS", type: "girl" },
+  { name: "MEOVV", type: "girl" },
+  { name: "FIFTY FIFTY", type: "girl" },
+  { name: "KEP1ER", type: "girl" },
+  { name: "STAYC", type: "girl" },
+  { name: "FROMIS_9", type: "girl" },
+  { name: "RED VELVET", type: "girl" },
+  { name: "MAMAMOO", type: "girl" },
+  { name: "OH MY GIRL", type: "girl" },
+  { name: "DREAMCATCHER", type: "girl" },
+  { name: "WEEEKLY", type: "girl" },
+  { name: "VIVIZ", type: "girl" },
+  { name: "WOOAH", type: "girl" },
+  { name: "CSR", type: "girl" },
+  { name: "TRIPLES", type: "girl" },
+  { name: "CLASS:Y", type: "girl" },
+  { name: "YOUNG POSSE", type: "girl" },
+  { name: "BADVILLAIN", type: "girl" },
+  { name: "RESCENE", type: "girl" },
+  { name: "UNIS", type: "girl" },
+  { name: "H1-KEY", type: "girl" },
+  { name: "CIGNATURE", type: "girl" },
+  { name: "PURPLE KISS", type: "girl" },
+
+  // SOLO
+  { name: "IU", type: "solo" },
+  { name: "TAEYEON", type: "solo" },
+  { name: "JUNGKOOK", type: "solo" },
+  { name: "JIMIN", type: "solo" },
+  { name: "V", type: "solo" },
+  { name: "RM", type: "solo" },
+  { name: "SUGA", type: "solo" },
+  { name: "J-HOPE", type: "solo" },
+  { name: "JHOPE", type: "solo" },
+  { name: "ROSÉ", type: "solo" },
+  { name: "ROSE", type: "solo" },
+  { name: "JENNIE", type: "solo" },
+  { name: "LISA", type: "solo" },
+  { name: "JISOO", type: "solo" },
+  { name: "CHA EUNWOO", type: "solo" },
+  { name: "SUNMI", type: "solo" },
+  { name: "CHUNGHA", type: "solo" },
+  { name: "SOMI", type: "solo" }
+];
+
+function render() {
+  const filter = document.getElementById("filterSelect").value;
+  const grid = document.getElementById("grid");
+
+  grid.innerHTML = "";
+
+  const filtered = artists.filter(a =>
+    filter === "all" || a.type === filter
+  );
+
+  filtered.forEach(a => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <img src="https://via.placeholder.com/300?text=${encodeURIComponent(a.name)}" />
+      <h3>${a.name}</h3>
+      <p>K-pop Artist</p>
+      <div class="badge">${a.type.toUpperCase()}</div>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>
