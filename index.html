@@ -293,12 +293,16 @@ async function search() {
 
   resultsBox.innerHTML = "Loading...";
 
-  try {
-    const res = await fetch(
-      `http://localhost:3000/search?q=${encodeURIComponent(query)}`
-    );
+try {
+  const res = await fetch(
+    `https://findkpop-backend.onrender.com/search?q=${encodeURIComponent(query)}`
+  );
 
-    const data = await res.json();
+  if (!res.ok) {
+    throw new Error("Network response was not OK");
+  }
+
+  const data = await res.json();
 
     if (!Array.isArray(data) || data.length === 0) {
       resultsBox.innerHTML = "No results found.";
