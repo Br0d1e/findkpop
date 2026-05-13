@@ -8,6 +8,16 @@ dotenv.config();
 const app = express();
 app.use(cors());
 
+app.get("/search", (req, res) => {
+  const query = req.query.q;
+
+  if (!query) {
+    return res.send("No search query provided");
+  }
+
+  res.send(`You searched for: ${query}`);
+});
+
 const PORT = process.env.PORT || 3000;
 
 /* SEARCH ROUTE */
