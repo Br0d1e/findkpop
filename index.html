@@ -246,10 +246,10 @@ body {
   </p>
 
 <div class="search-box">
-  <form onsubmit="handleSearch(event)">
+  <form action="/search.html" method="get">
     <input 
-      id="searchInput" 
-      placeholder="Search (e.g. AESPA album)" 
+      name="q"
+      placeholder="Search (e.g. NEWJEANS album)" 
       required
     >
     <button type="submit">Search</button>
