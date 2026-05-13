@@ -246,9 +246,32 @@ body {
   </p>
 
   <div class="search-box">
-    <input id="searchInput" placeholder="Search (e.g. NEWJEANS album)">
-    <button onclick="search()">Search</button>
-  </div>
+  <form action="/search" method="get" onsubmit="return handleSearch(event)">
+    <input 
+      id="searchInput" 
+      name="q" 
+      placeholder="Search (e.g. NEWJEANS album)" 
+      required
+    >
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<script>
+function handleSearch(e) {
+  const input = document.getElementById("searchInput").value.trim();
+
+  if (!input) {
+    alert("Please enter a search term");
+    return false;
+  }
+
+  // Optional: if you still want JS control before submitting
+  console.log("Searching for:", input);
+
+  return true; // allows form to submit
+}
+</script>
 
   <div class="quick">
     <button onclick="quickSearch('NEWJEANS album')">NEWJEANS</button>
