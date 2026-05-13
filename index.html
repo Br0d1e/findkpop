@@ -245,46 +245,10 @@ body {
     Powered by live shopping data across the web
   </p>
 
-<div class="search-box">
-  <form action="/search.html" method="get">
-    <input 
-      name="q"
-      placeholder="Search (e.g. NEWJEANS album)" 
-      required
-    >
-    <button type="submit">Search</button>
-  </form>
-</div>
-
-<script>
-function handleSearch(e) {
-  e.preventDefault();
-
-  const input = document.getElementById("searchInput");
-  const q = input.value.trim();
-
-  if (!q) return;
-
-  // Redirect to Google search
-  window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(q);
-}
-</script>
-
-<script>
-function handleSearch(e) {
-  const input = document.getElementById("searchInput").value.trim();
-
-  if (!input) {
-    alert("Please enter a search term");
-    return false;
-  }
-
-  // Optional: if you still want JS control before submitting
-  console.log("Searching for:", input);
-
-  return true; // allows form to submit
-}
-</script>
+  <div class="search-box">
+    <input id="searchInput" placeholder="Search (e.g. NEWJEANS album)">
+    <button onclick="search()">Search</button>
+  </div>
 
   <div class="quick">
     <button onclick="quickSearch('NEWJEANS album')">NEWJEANS</button>
