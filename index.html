@@ -245,17 +245,30 @@ body {
     Powered by live shopping data across the web
   </p>
 
-  <div class="search-box">
-  <form action="/search" method="get" onsubmit="return handleSearch(event)">
+<div class="search-box">
+  <form onsubmit="handleSearch(event)">
     <input 
       id="searchInput" 
-      name="q" 
-      placeholder="Search (e.g. NEWJEANS album)" 
+      placeholder="Search (e.g. AESPA album)" 
       required
     >
     <button type="submit">Search</button>
   </form>
 </div>
+
+<script>
+function handleSearch(e) {
+  e.preventDefault();
+
+  const input = document.getElementById("searchInput");
+  const q = input.value.trim();
+
+  if (!q) return;
+
+  // Redirect to Google search
+  window.location.href = "https://www.google.com/search?q=" + encodeURIComponent(q);
+}
+</script>
 
 <script>
 function handleSearch(e) {
